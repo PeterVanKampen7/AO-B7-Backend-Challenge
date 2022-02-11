@@ -7,14 +7,18 @@
         $user = credCheck($_POST['username'], $_POST['password']);
         if($user){
             $_SESSION['logged_in'] = true;
+            $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['admin'] = $user['admin'];
         }
     } else if(isset($_POST['submit_reg'])){
         $newUserId = createUser($_POST['username'], $_POST['password']);
         $user = getUser($newUserId);
         if($user){
             $_SESSION['logged_in'] = true;
+            $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['admin'] = $user['admin'];
         }
     }
 ?>
@@ -22,14 +26,15 @@
 <?php
     if($_SESSION['logged_in'] == true){
         ?>
-
-
-
+            <div class="content homepage_logged_in_container w3-padding-large">
+                <h1>Welkom <?php echo $_SESSION['username']; ?></h1>
+                <p>Klik op een knop bovenaan in het menu om te beginnen!</p>
+            </div>
         <?php
     } else {
         ?>
 
-        <div class="content homepage_no_login_container w3-display-middle w3-mobile">
+        <div class="content homepage_no_login_container w3-display-middle">
             <div class="login">
                 <form action="index.php" method="post">
                     <fieldset>

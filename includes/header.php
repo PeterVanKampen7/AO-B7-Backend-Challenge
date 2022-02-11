@@ -5,9 +5,11 @@
     switch($pageDepth){
         case 0:
             $navLinks['Home'] = 'index.php';
+            $navLinks['Mijn borden'] = 'pages/boardArchive.php';
             break;
         case 1:
             $navLinks['Home'] = '../index.php';
+            $navLinks['Mijn borden'] = '../pages/boardArchive.php';
             break;
     }
 
@@ -24,11 +26,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
     <?php
         if($pageDepth == 0){
-            echo '<link rel="stylesheet" href="styles/style.css">';
+            echo '
+            <link rel="stylesheet" href="styles/style.css">
+            <script defer src="scripts/script.js"></script>';
         } else if($pageDepth == 1){
-            echo '<link rel="stylesheet" href="../styles/style.css">';
+            echo '
+            <link rel="stylesheet" href="../styles/style.css">
+            <script defer src="../scripts/script.js"></script>';
         }
     ?>
     <title>To Do App</title>

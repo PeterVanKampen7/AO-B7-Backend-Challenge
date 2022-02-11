@@ -1,5 +1,6 @@
 <?php
 
+// Prep functions, globally useful
 function openConn(){
     try {
         $conn = new PDO('mysql:host=localhost;dbname=b7_back-end', "root", "mysql");
@@ -14,6 +15,16 @@ function closeConn($conn){
     $conn = null;
 }
 
+function clean($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+// End prep functions
+
+
+// Check credentials
 function credCheck($name, $pass){
     $conn = openConn();
 
@@ -29,14 +40,10 @@ function credCheck($name, $pass){
 
     return $user;
 }
+// End credentials
 
-function clean($data){
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
 
+// User information functions
 function getUser($id){
     $conn = openConn();
 
@@ -73,5 +80,54 @@ function createUser($name, $pass){
 
     return $id;
 }
+// End user information functions
+
+
+// Board information functions
+function getBoards($id, $admin = false){
+    $conn = openConn();
+
+    if($admin){
+
+        $query = "SELECT * FROM `boards`";
+        $result = $conn->prepare($query);
+        $result->execute(['id' => $id]);
+        $boards = $result->fetchAll();
+
+    } else {
+
+        $query = "SELECT * FROM `boards` WHERE `user_id`=:id";
+        $result = $conn->prepare($query);
+        $result->execute(['id' => $id]);
+        $boards = $result->fetchAll();
+
+    }
+
+    closeConn($conn);
+
+    return $boards;
+}
+function createBoard($id, $name){
+    $conn = openConn();
+
+    $name = clean($name);
+    $id = clean($id);
+
+    $result = $conn->prepare("INSERT INTO boards SET 
+        `user_id` = :user,
+        `name` = :name
+    ");
+    $result->execute([
+        'user' => $id,
+        'name' => $name
+    ]);
+
+    $id = $conn->lastInsertId();
+
+    closeConn($conn);
+
+    return $id;
+}
+// End board information functions
 
 ?>

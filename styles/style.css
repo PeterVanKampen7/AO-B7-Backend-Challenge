@@ -49,3 +49,32 @@ a{
     background-color: transparent;
     cursor: pointer;
 }
+
+.boardArchiveControls{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.boardArchiveControls form{
+    display: none;
+}
+.boardArchiveControls form input{
+    padding: 6px;
+}
+.boardArchiveBoardsContainer{
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 1fr 1fr;
+}
+.boardArchiveBoardsContainer a:nth-child(2n) div{
+    background-color: rgb(255, 66, 66)!important;
+}
+.boardArchiveBoardsContainer a:nth-child(3n) div{
+    background-color: rgb(0, 225, 255)!important;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
