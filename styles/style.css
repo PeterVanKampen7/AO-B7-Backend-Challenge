@@ -1,0 +1,45 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.header_nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+}
+.header_nav .header-left{
+    min-width: max-content;
+    margin-right: 50px;
+}
+a{
+    text-decoration: none;
+}
+.homepage_no_login_container{
+    display: flex;
+}
+.homepage_no_login_container fieldset{
+    padding: 50px;
+    margin: 0 20px;
+    font-size: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.homepage_no_login_container fieldset label{
+    font-size: 14px;
+}
+.homepage_no_login_container fieldset input{
+    margin-bottom: 15px;
+    padding: 5px;
+    font-size: 14px;
+}
+@media only screen and (max-width: 700px){
+    .homepage_no_login_container{
+        flex-direction: column;
+        position: unset;
+        transform: unset;
+        padding-top: 25px;
+    }
+}
