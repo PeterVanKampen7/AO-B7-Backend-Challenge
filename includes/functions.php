@@ -128,6 +128,37 @@ function createBoard($id, $name){
 
     return $id;
 }
+function getLists($board_id){
+    $conn = openConn();
+
+    $board_id = clean($board_id);
+
+    $query = "SELECT * FROM `lists` WHERE `board_id`=:board_id";
+    $result = $conn->prepare($query);
+    $result->execute(['board_id' => $board_id]);
+    $boards = $result->fetchAll();
+
+    closeConn($conn);
+
+    return $boards;
+}
+function createList($board_id, $name){
+    $conn = openConn();
+
+    $name = clean($name);
+    $board_id = clean($board_id);
+
+    $result = $conn->prepare("INSERT INTO lists SET 
+        `board_id` = :id,
+        `name` = :name
+    ");
+    $result->execute([
+        'id' => $board_id,
+        'name' => $name
+    ]);
+
+    closeConn($conn);
+}
 // End board information functions
 
 ?>

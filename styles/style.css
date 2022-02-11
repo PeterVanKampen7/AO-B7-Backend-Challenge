@@ -50,15 +50,15 @@ a{
     cursor: pointer;
 }
 
-.boardArchiveControls{
+.boardArchiveControls, .listControls{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-.boardArchiveControls form{
+.boardArchiveControls form, .listControls form{
     display: none;
 }
-.boardArchiveControls form input{
+.boardArchiveControls form input, .listControls form input{
     padding: 6px;
 }
 .boardArchiveBoardsContainer{
