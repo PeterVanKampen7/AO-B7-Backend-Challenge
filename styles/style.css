@@ -43,3 +43,9 @@ a{
         padding-top: 25px;
     }
 }
+
+.logout-btn{
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+}

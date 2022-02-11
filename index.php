@@ -6,7 +6,6 @@
     if(isset($_POST['submit_login'])){
         $user = credCheck($_POST['username'], $_POST['password']);
         if($user){
-            session_start();
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $user['username'];
         }
@@ -14,7 +13,6 @@
         $newUserId = createUser($_POST['username'], $_POST['password']);
         $user = getUser($newUserId);
         if($user){
-            session_start();
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $user['username'];
         }
@@ -22,7 +20,7 @@
 ?>
     
 <?php
-    if(isset($_SESSION['username'])){
+    if($_SESSION['logged_in'] == true){
         ?>
 
 

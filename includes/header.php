@@ -1,5 +1,5 @@
 <?php
-    
+    session_start();
     include('functions.php');
     $navLinks = array();
     switch($pageDepth){
@@ -9,6 +9,11 @@
         case 1:
             $navLinks['Home'] = '../index.php';
             break;
+    }
+
+    if(isset($_POST['logout'])){
+        session_unset();
+        session_destroy();
     }
 ?>
 
@@ -41,5 +46,10 @@
                     echo "<a href='{$value}' class='w3-bar-item'>{$key}</a>";
                 }
             ?>
+        </div>
+        <div class="logout">
+            <form action="" method="post">
+                <input type="submit" value="Log uit" name="logout" class="logout-btn w3-bar-item">
+            </form>
         </div>
     </header>
