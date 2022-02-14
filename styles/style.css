@@ -83,11 +83,14 @@ a{
     place-items: flex-start;
     flex-wrap: nowrap;
     overflow-x: auto;
+    min-height: 60vh;
+    margin-bottom: 20px;
 }
 .single-list{
-    max-width: 400px;
+    max-width: 250px;
     min-width: 250px;
     margin-right: 20px;
+    
 }
 .single-list h1{
     font-size: 26px;
@@ -131,6 +134,7 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
+    line-clamp: 4;
 }
 .modal{
     display: none;
@@ -155,6 +159,22 @@ a{
 .addCardForm{
     display: flex;
     flex-direction: column;
+}
+.addCardForm input[type='submit']{
+    margin-top: 15px;
+}
+.list-header{
+    display: flex;
+    flex-direction: row;
+}
+.list-header h1{
+    flex-grow: 1;
+}
+.list-header button{
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
 }
 
 footer {

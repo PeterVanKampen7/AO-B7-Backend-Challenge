@@ -195,4 +195,20 @@ function createCard($list_id, $title, $desc){
 }
 // End board information functions
 
+// Start delete functions
+function deleteList($list_id){
+    $conn = openConn();
+
+    $list_id = clean($list_id);
+
+    $list = $conn->prepare("DELETE FROM lists WHERE id=:safe");
+    $list->execute(['safe' => $list_id]);
+
+    $cards = $conn->prepare("DELETE FROM cards WHERE list_id=:safe");
+    $cards->execute(['safe' => $list_id]);
+
+    closeConn($conn);
+}
+// End delete functions
+
 ?>

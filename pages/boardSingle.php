@@ -13,8 +13,10 @@
         $title = $_POST['cardTitle'];
         $desc = $_POST['cardDesc'];
 
-        createCard($list_id, $title, $desc);
-        
+        createCard($list_id, $title, $desc);       
+    }
+    if(isset($_POST['remove_list'])){
+        deleteList($_POST['list_id']);
     }
 
     $lists = getLists($board_id);
@@ -38,8 +40,11 @@
                                 ?>
                                     <div class="w3-card-4 single-list">
 
-                                        <header class="w3-container w3-blue">
+                                        <header class="w3-container w3-blue list-header">
                                             <h1><?php echo $list['name']; ?></h1>
+                                            <button onclick='openModal("remove_list", <?php echo $list["id"]; ?>)'>
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
                                         </header>
 
                                         <?php 
