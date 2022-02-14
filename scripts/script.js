@@ -28,6 +28,9 @@ function openModal(reason, id = 0, extra = ''){
         case 'edit_list':
             content += renderEditList(reason, id, extra);
             break;
+        case 'edit_board':
+            content += renderEditBoard(reason, id, extra);
+            break;
     }
 
     modalContent.innerHTML = content;
@@ -78,6 +81,19 @@ function renderEditList(reason, id, extra){
         <h4> Naam aanpassen </h4>
         <form method='post' class='addCardForm'>      
             <input type='hidden' name='list_id' value='${id}' />
+            <label for='newName'>Naam</label>
+            <input type='text' name='newName' value='${extra}' placeholder='${extra}' />
+
+            <input type='submit' name='${reason}' value='Aanpassen' class='w3-button w3-blue'>
+        </form>
+    `;
+}
+
+function renderEditBoard(reason, id, extra){
+    return `
+        <h4> Naam aanpassen </h4>
+        <form method='post' class='addCardForm'>      
+            <input type='hidden' name='board_id' value='${id}' />
             <label for='newName'>Naam</label>
             <input type='text' name='newName' value='${extra}' placeholder='${extra}' />
 

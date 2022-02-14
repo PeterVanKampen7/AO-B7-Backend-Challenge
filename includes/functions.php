@@ -232,6 +232,23 @@ function deleteList($list_id){
 // End delete functions
 
 // Start edit functions
+function editBoard($board_id, $name){
+    $conn = openConn();
+
+    $board_id = clean($board_id);
+    $name = clean($name);
+
+    $result = $conn->prepare("UPDATE boards SET 
+        `name` = :safe
+        WHERE id=:id"
+    );
+    $result->execute([
+        'safe' => $name,
+        'id' => $board_id
+    ]); 
+
+    closeConn($conn);
+}
 function editList($list_id, $name){
     $conn = openConn();
 

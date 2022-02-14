@@ -9,6 +9,9 @@
     if(isset($_POST['remove_board'])){
         deleteBoard($_POST['board_id']);
     }
+    if(isset($_POST['edit_board'])){
+        editBoard($_POST['board_id'], $_POST['newName']);
+    }
 
     $boards = getBoards($_SESSION['user_id'], $_SESSION['admin']);
 
@@ -35,6 +38,11 @@
                                             <a href="boardSingle.php?id=<?php echo $board['id'];?>">
                                                 <h3><?php echo $board['name']; ?></h3>
                                             </a>
+
+                                            <button onclick='openModal("edit_board", <?php echo $board["id"]; ?>, "<?php echo $board["name"]; ?>")'>
+                                                <i class="fa-solid fa-edit"></i>
+                                            </button>
+
                                             <button onclick='openModal("remove_board", <?php echo $board["id"]; ?>)'>
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
