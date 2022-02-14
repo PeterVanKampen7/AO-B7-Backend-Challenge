@@ -180,15 +180,10 @@ function createCard($list_id, $title, $desc){
     $title = clean($title);
     $desc = clean($desc);
 
-    error_log($list_id);
-    error_log($title);
-    error_log($desc);
-
-
     $result = $conn->prepare("INSERT INTO cards SET 
         `list_id` = :list_id,
         `title` = :title,
-        `description` = :descrip,
+        `description` = :descrip
     ");
     $result->execute([
         'list_id' => $list_id,

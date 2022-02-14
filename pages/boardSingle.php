@@ -9,7 +9,12 @@
         createList($board_id, $_POST['listName']);
     }
     if(isset($_POST['add_card'])){
-        createCard($_POST['list_id'], $_POST['cardTitle'], $_POST['cardDesc']);
+        $list_id = $_POST['list_id'];
+        $title = $_POST['cardTitle'];
+        $desc = $_POST['cardDesc'];
+
+        createCard($list_id, $title, $desc);
+        
     }
 
     $lists = getLists($board_id);
