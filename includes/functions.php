@@ -196,6 +196,26 @@ function createCard($list_id, $title, $desc){
 // End board information functions
 
 // Start delete functions
+function deleteBoard($board_id){
+    $conn = openConn();
+
+    $board_id = clean($board_id);
+
+    $query = "SELECT `id` FROM `lists` WHERE `board_id`=:board_id";
+    $result = $conn->prepare($query);
+    $result->execute(['board_id' => $board_id]);
+    $lists = $result->fetchAll();
+
+
+    $board = $conn->prepare("DELETE FROM boards WHERE id=:safe");
+    $board->execute(['safe' => $board_id]);
+
+    foreach($lists as $list){
+        deleteList($list['id']);
+    }
+
+    closeConn($conn);
+}
 function deleteList($list_id){
     $conn = openConn();
 
@@ -211,4 +231,23 @@ function deleteList($list_id){
 }
 // End delete functions
 
+// Start edit functions
+function editList($list_id, $name){
+    $conn = openConn();
+
+    $list_id = clean($list_id);
+    $name = clean($name);
+
+    $result = $conn->prepare("UPDATE lists SET 
+        `name` = :safe
+        WHERE id=:id"
+    );
+    $result->execute([
+        'safe' => $name,
+        'id' => $list_id
+    ]); 
+
+    closeConn($conn);
+}
+// End edit functions
 ?>

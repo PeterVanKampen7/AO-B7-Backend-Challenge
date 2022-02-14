@@ -6,6 +6,9 @@
     if(isset($_POST['createBoard'])){
         createBoard($_SESSION['user_id'], $_POST['boardName']);
     }
+    if(isset($_POST['remove_board'])){
+        deleteBoard($_POST['board_id']);
+    }
 
     $boards = getBoards($_SESSION['user_id'], $_SESSION['admin']);
 
@@ -27,15 +30,31 @@
                         <?php
                             foreach($boards as $board){
                                 ?>
-                                    <a href="boardSingle.php?id=<?php echo $board['id'];?>">
+                                    
                                         <div class="w3-card w3-blue w3-padding boardCard">
-                                            <h3><?php echo $board['name']; ?></h3>
+                                            <a href="boardSingle.php?id=<?php echo $board['id'];?>">
+                                                <h3><?php echo $board['name']; ?></h3>
+                                            </a>
+                                            <button onclick='openModal("remove_board", <?php echo $board["id"]; ?>)'>
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
                                         </div>
-                                    </a>
+                                   
                                 <?php
                             }
                         ?>
                     </div>              
+                </div>
+            </div>
+
+            <div class="modal" modal>
+                
+                <div class='modalInner'>
+                    <span onclick="document.querySelector('[modal]').style.display='none'"
+                    class="w3-button">&times;</span>
+                    <div class="modalContent" modalContent>
+                        <p>Placeholder tekst</p>
+                    </div>
                 </div>
             </div>
         <?php

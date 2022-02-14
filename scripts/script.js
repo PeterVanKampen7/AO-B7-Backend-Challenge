@@ -10,7 +10,7 @@ try{
     });
 } catch(e){}
 
-function openModal(reason, id = 0){
+function openModal(reason, id = 0, extra = ''){
     const modal = document.querySelector('[modal]');
     const modalContent = document.querySelector('[modalContent]');
 
@@ -21,6 +21,12 @@ function openModal(reason, id = 0){
             break;
         case 'remove_list':
             content += renderDeleteList(reason, id);
+            break;
+        case 'remove_board':
+            content += renderDeleteBoard(reason, id);
+            break;
+        case 'edit_list':
+            content += renderEditList(reason, id, extra);
             break;
     }
 
@@ -52,6 +58,30 @@ function renderDeleteList(reason, id){
             <input type='hidden' name='list_id' value='${id}' />
             <label for='${reason}'>Weet je zeker dat je deze lijst wilt verwijderen?</label>
             <input type='submit' name='${reason}' value='Verwijderen' class='w3-button w3-red'>
+        </form>
+    `;
+}
+
+function renderDeleteBoard(reason, id){
+    return `
+        <h4> Bord verwijderen </h4>
+        <form method='post' class='addCardForm'>      
+            <input type='hidden' name='board_id' value='${id}' />
+            <label for='${reason}'>Weet je zeker dat je dit bord wilt verwijderen?</label>
+            <input type='submit' name='${reason}' value='Verwijderen' class='w3-button w3-red'>
+        </form>
+    `;
+}
+
+function renderEditList(reason, id, extra){
+    return `
+        <h4> Naam aanpassen </h4>
+        <form method='post' class='addCardForm'>      
+            <input type='hidden' name='list_id' value='${id}' />
+            <label for='newName'>Naam</label>
+            <input type='text' name='newName' value='${extra}' placeholder='${extra}' />
+
+            <input type='submit' name='${reason}' value='Aanpassen' class='w3-button w3-blue'>
         </form>
     `;
 }

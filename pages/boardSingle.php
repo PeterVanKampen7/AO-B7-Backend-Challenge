@@ -18,6 +18,9 @@
     if(isset($_POST['remove_list'])){
         deleteList($_POST['list_id']);
     }
+    if(isset($_POST['edit_list'])){
+        editList($_POST['list_id'], $_POST['newName']);
+    }
 
     $lists = getLists($board_id);
 ?>
@@ -42,6 +45,11 @@
 
                                         <header class="w3-container w3-blue list-header">
                                             <h1><?php echo $list['name']; ?></h1>
+
+                                            <button onclick='openModal("edit_list", <?php echo $list["id"]; ?>, "<?php echo $list["name"]; ?>")'>
+                                                <i class="fa-solid fa-edit"></i>
+                                            </button>
+
                                             <button onclick='openModal("remove_list", <?php echo $list["id"]; ?>)'>
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
@@ -49,14 +57,19 @@
 
                                         <?php 
                                             $cards = getCards($list['id']);
-                                            foreach($cards as $card){
-                                                ?>
-                                                    <div class="w3-container singleCard">
-                                                        <h4><?php echo $card['title'] ?></h4>
-                                                        <p><?php echo $card['description'] ?></p>
-                                                    </div>
-                                                <?php
+                                            if($cards){
+                                                foreach($cards as $card){
+                                                    ?>
+                                                        <div class="w3-container singleCard">
+                                                            <h4><?php echo $card['title'] ?></h4>
+                                                            <p><?php echo $card['description'] ?></p>
+                                                        </div>
+                                                    <?php
+                                                }
+                                            } else {
+                                                echo '<br>';
                                             }
+                                            
                                         ?>
 
                                         <div class="w3-container w3-blue list-footer">
