@@ -229,6 +229,16 @@ function deleteList($list_id){
 
     closeConn($conn);
 }
+function deleteCard($card_id){
+    $conn = openConn();
+
+    $card_id = clean($card_id);
+
+    $cards = $conn->prepare("DELETE FROM cards WHERE id=:safe");
+    $cards->execute(['safe' => $card_id]);
+
+    closeConn($conn);
+}
 // End delete functions
 
 // Start edit functions
@@ -262,6 +272,26 @@ function editList($list_id, $name){
     $result->execute([
         'safe' => $name,
         'id' => $list_id
+    ]); 
+
+    closeConn($conn);
+}
+function editCard($card_id, $name, $desc){
+    $conn = openConn();
+
+    $card_id = clean($card_id);
+    $name = clean($name);
+    $desc = clean($desc);
+
+    $result = $conn->prepare("UPDATE cards SET 
+        `title` = :name,
+        `description` = :desc
+        WHERE id=:id"
+    );
+    $result->execute([
+        'name' => $name,
+        'desc' => $desc,
+        'id' => $card_id       
     ]); 
 
     closeConn($conn);

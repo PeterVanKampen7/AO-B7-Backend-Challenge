@@ -21,6 +21,12 @@
     if(isset($_POST['edit_list'])){
         editList($_POST['list_id'], $_POST['newName']);
     }
+    if(isset($_POST['edit_card'])){
+        editCard($_POST['card_id'], $_POST['newName'], $_POST['newDesc']);
+    }
+    if(isset($_POST['delete_card'])){
+        deleteCard($_POST['card_id']);
+    }
 
     $lists = getLists($board_id);
 ?>
@@ -60,10 +66,12 @@
                                             if($cards){
                                                 foreach($cards as $card){
                                                     ?>
-                                                        <div class="w3-container singleCard">
-                                                            <h4><?php echo $card['title'] ?></h4>
-                                                            <p><?php echo $card['description'] ?></p>
-                                                        </div>
+                                                        <button class='single-card-button' onclick='openModal("edit_card", <?php echo $card["id"]; ?>, ["<?php echo $card["title"]; ?>","<?php echo $card["description"]; ?>"])'>
+                                                            <div class="w3-container singleCard">
+                                                                <h4><?php echo $card['title'] ?></h4>
+                                                                <p><?php echo $card['description'] ?></p>
+                                                            </div>
+                                                        </button>       
                                                     <?php
                                                 }
                                             } else {

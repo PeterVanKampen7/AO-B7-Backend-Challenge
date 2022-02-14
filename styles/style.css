@@ -121,6 +121,7 @@ a{
     overflow: hidden;
     transition: .2s ease;
     cursor: pointer;
+    flex-grow: 1;
 }
 .singleCard:hover{
     background-color: #aaa;
@@ -158,6 +159,7 @@ a{
     background-color: white;
     padding: 20px;
     position: relative;
+    max-width: 40vw;
 }
 .modalInner span{
     position: absolute;
@@ -186,6 +188,12 @@ a{
     color: white;
     cursor: pointer;
     margin-left: 10px;
+}
+.single-card-button{
+    background-color: transparent;
+    border: none;
+    display: flex;
+    width: 100%;
 }
 
 footer {

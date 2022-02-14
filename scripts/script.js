@@ -31,6 +31,9 @@ function openModal(reason, id = 0, extra = ''){
         case 'edit_board':
             content += renderEditBoard(reason, id, extra);
             break;
+        case 'edit_card':
+            content += renderCardContent(reason, id, extra);
+            break;
     }
 
     modalContent.innerHTML = content;
@@ -98,6 +101,24 @@ function renderEditBoard(reason, id, extra){
             <input type='text' name='newName' value='${extra}' placeholder='${extra}' />
 
             <input type='submit' name='${reason}' value='Aanpassen' class='w3-button w3-blue'>
+        </form>
+    `;
+}
+
+function renderCardContent(reason, id, extra){
+    return `
+        <h4> Kaart aanpassen </h4>
+        <form method='post' class='addCardForm'>      
+            <input type='hidden' name='card_id' value='${id}' />
+            <label for='newName'>Naam</label>
+            <input type='text' name='newName' value='${extra[0]}' />
+
+            <label for='newDesc'>Beschrijving</label>
+            <textarea type='text' name='newDesc' value='${extra[1]}'></textarea>
+
+            <input type='submit' name='${reason}' value='Aanpassen' class='w3-button w3-blue'>
+            <hr>
+            <input type='submit' name='delete_card' value='Kaart verwijderen' class='w3-button w3-red'>
         </form>
     `;
 }
