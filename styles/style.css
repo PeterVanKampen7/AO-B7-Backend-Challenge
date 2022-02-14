@@ -49,6 +49,11 @@ a{
     background-color: transparent;
     cursor: pointer;
 }
+.logout form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
 .boardArchiveControls, .listControls{
     display: flex;
@@ -71,6 +76,85 @@ a{
 }
 .boardArchiveBoardsContainer a:nth-child(3n) div{
     background-color: rgb(0, 225, 255)!important;
+}
+.list-container{
+    display: flex;
+    flex-direction: row;
+    place-items: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+.single-list{
+    max-width: 400px;
+    min-width: 250px;
+    margin-right: 20px;
+}
+.single-list h1{
+    font-size: 26px;
+}
+.list-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+}
+.list-footer i{
+    margin-left: 5px;
+}
+.list-footer button{
+    background-color: white;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+}
+.singleCard{
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 1px solid #aaa;
+    padding: 0;
+    overflow: hidden;
+}
+.singleCard h4{
+    background-color: #aaa;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    
+}
+.singleCard p{
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal{
+    display: none;
+    position: absolute;
+    inset: 0;
+    background-color: #444444aa;
+    justify-content: center;
+    align-items: center;
+}
+.modalInner{
+    background-color: white;
+    padding: 20px;
+    position: relative;
+}
+.modalInner span{
+    position: absolute;
+    right: 10px;
+}
+.modalContent{
+    margin-top: 50px;
+}
+.addCardForm{
+    display: flex;
+    flex-direction: column;
 }
 
 footer {

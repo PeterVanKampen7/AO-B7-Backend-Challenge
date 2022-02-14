@@ -136,11 +136,11 @@ function getLists($board_id){
     $query = "SELECT * FROM `lists` WHERE `board_id`=:board_id";
     $result = $conn->prepare($query);
     $result->execute(['board_id' => $board_id]);
-    $boards = $result->fetchAll();
+    $lists = $result->fetchAll();
 
     closeConn($conn);
 
-    return $boards;
+    return $lists;
 }
 function createList($board_id, $name){
     $conn = openConn();
@@ -155,6 +155,45 @@ function createList($board_id, $name){
     $result->execute([
         'id' => $board_id,
         'name' => $name
+    ]);
+
+    closeConn($conn);
+}
+function getCards($list_id){
+    $conn = openConn();
+
+    $list_id = clean($list_id);
+
+    $query = "SELECT * FROM `cards` WHERE `list_id`=:list_id";
+    $result = $conn->prepare($query);
+    $result->execute(['list_id' => $list_id]);
+    $cards = $result->fetchAll();
+
+    closeConn($conn);
+
+    return $cards;
+}
+function createCard($list_id, $title, $desc){
+    $conn = openConn();
+
+    $list_id = clean($list_id);
+    $title = clean($title);
+    $desc = clean($desc);
+
+    error_log($list_id);
+    error_log($title);
+    error_log($desc);
+
+
+    $result = $conn->prepare("INSERT INTO cards SET 
+        `list_id` = :list_id,
+        `title` = :title,
+        `description` = :descrip,
+    ");
+    $result->execute([
+        'list_id' => $list_id,
+        'title' => $title,
+        'descrip' => $desc
     ]);
 
     closeConn($conn);

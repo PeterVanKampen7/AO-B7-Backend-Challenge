@@ -26,6 +26,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://kit.fontawesome.com/7cbd5a96fb.js" crossorigin="anonymous"></script>
     
     <?php
         if($pageDepth == 0){
@@ -57,6 +58,7 @@
         <div class="logout">
             <form action="" method="post">
                 <input type="submit" value="Log uit" name="logout" class="logout-btn w3-bar-item">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
             </form>
         </div>
     </header>
