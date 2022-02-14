@@ -173,25 +173,43 @@ function getCards($list_id){
 
     return $cards;
 }
-function createCard($list_id, $title, $desc){
+function createCard($list_id, $title, $desc, $duration, $status){
     $conn = openConn();
 
     $list_id = clean($list_id);
     $title = clean($title);
     $desc = clean($desc);
+    $duration = clean($duration);
+    $status = clean($status);
 
     $result = $conn->prepare("INSERT INTO cards SET 
         `list_id` = :list_id,
         `title` = :title,
-        `description` = :descrip
+        `description` = :descrip,
+        `duration` = :duration,
+        `status` = :status
     ");
     $result->execute([
         'list_id' => $list_id,
         'title' => $title,
-        'descrip' => $desc
+        'descrip' => $desc,
+        'duration' => $duration,
+        'status' => $status
     ]);
 
     closeConn($conn);
+}
+function getStatuses(){
+    $conn = openConn();
+
+    $query = "SELECT * FROM `statuses`";
+    $result = $conn->prepare($query);
+    $result->execute();
+    $statuses = $result->fetchAll();
+
+    closeConn($conn);
+
+    return $statuses;
 }
 // End board information functions
 

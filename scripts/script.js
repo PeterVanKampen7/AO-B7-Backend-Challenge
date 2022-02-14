@@ -10,14 +10,14 @@ try{
     });
 } catch(e){}
 
-function openModal(reason, id = 0, extra = ''){
+function openModal(reason, id, extra = ''){
     const modal = document.querySelector('[modal]');
     const modalContent = document.querySelector('[modalContent]');
 
     let content = '';
     switch(reason){
         case 'add_card':
-            content += renderAddCardForm(reason, id);
+            content += renderAddCardForm(reason, id, extra);
             break;
         case 'remove_list':
             content += renderDeleteList(reason, id);
@@ -40,7 +40,15 @@ function openModal(reason, id = 0, extra = ''){
     modal.style.display = 'flex'; 
 }
 
-function renderAddCardForm(reason, id){
+function renderAddCardForm(reason, id, extra){
+    let statusArray = JSON.parse(JSON.stringify(extra));
+    let output = '';
+    for(let i in statusArray){
+        output += `
+            <option value='${statusArray[i]['id']}'>${statusArray[i]['name']}</option>
+        `;
+    }
+
     return `
         <h4> Kaart toevoegen </h4>
         <form method='post' class='addCardForm'>
@@ -49,6 +57,14 @@ function renderAddCardForm(reason, id){
 
             <label for='cardDesc'>Beschrijving</label>
             <textarea name='cardDesc'></textarea>
+
+            <label for='cardDuration'>Tijdsduur</label>
+            <input type='number' name='cardDuration' />
+
+            <label for='cardStatus'>Status</label>
+            <select name='cardStatus'>
+            ${output}
+            </select>
 
             <input type='hidden' name='list_id' value='${id}' />
 

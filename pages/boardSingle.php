@@ -8,27 +8,38 @@
     if(isset($_POST['createList'])){
         createList($board_id, $_POST['listName']);
     }
-    if(isset($_POST['add_card'])){
+    else if(isset($_POST['add_card'])){
         $list_id = $_POST['list_id'];
         $title = $_POST['cardTitle'];
         $desc = $_POST['cardDesc'];
+        $duration = $_POST['cardDuration'];
+        $status = $_POST['cardStatus'];
 
-        createCard($list_id, $title, $desc);       
+        createCard($list_id, $title, $desc, $duration, $status);       
     }
-    if(isset($_POST['remove_list'])){
+    else if(isset($_POST['remove_list'])){
         deleteList($_POST['list_id']);
     }
-    if(isset($_POST['edit_list'])){
+    else if(isset($_POST['edit_list'])){
         editList($_POST['list_id'], $_POST['newName']);
     }
-    if(isset($_POST['edit_card'])){
+    else if(isset($_POST['edit_card'])){
         editCard($_POST['card_id'], $_POST['newName'], $_POST['newDesc']);
     }
-    if(isset($_POST['delete_card'])){
+    else if(isset($_POST['delete_card'])){
         deleteCard($_POST['card_id']);
     }
 
     $lists = getLists($board_id);
+
+    $statuses = getStatuses();
+    $statusesJSON = json_encode($statuses);
+
+    $statusColors = array();
+    foreach($statuses as $status){
+        $statusColors[$status['id']] = $status['color'];
+    }
+
 ?>
     
 <?php
@@ -68,7 +79,7 @@
                                                     ?>
                                                         <button class='single-card-button' onclick='openModal("edit_card", <?php echo $card["id"]; ?>, ["<?php echo $card["title"]; ?>","<?php echo $card["description"]; ?>"])'>
                                                             <div class="w3-container singleCard">
-                                                                <h4><?php echo $card['title'] ?></h4>
+                                                                <h4 style="background-color: <?php echo $statusColors[$card['status']]; ?>"><?php echo $card['title'] ?></h4>
                                                                 <p><?php echo $card['description'] ?></p>
                                                             </div>
                                                         </button>       
@@ -81,7 +92,7 @@
                                         ?>
 
                                         <div class="w3-container w3-blue list-footer">
-                                            <button class='w3-text-blue' onclick = 'openModal("add_card", <?php echo $list["id"]; ?>)' >
+                                            <button class='w3-text-blue' onclick = 'openModal("add_card", <?php echo $list["id"]; ?>, <?php echo $statusesJSON; ?>)' >
                                                 Toevoegen
                                                 <i class="fa-solid fa-circle-plus"></i>
                                             </button>           
