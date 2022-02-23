@@ -63,6 +63,10 @@
                                         <header class="w3-container w3-blue list-header">
                                             <h1><?php echo $list['name']; ?></h1>
 
+                                            <button onclick='openModal("sort_list", <?php echo $list["id"]; ?>, <?php echo $statusesJSON; ?>)'>
+                                                <i class="fa-solid fa-filter"></i>
+                                            </button>
+
                                             <button onclick='openModal("edit_list", <?php echo $list["id"]; ?>, "<?php echo $list["name"]; ?>")'>
                                                 <i class="fa-solid fa-edit"></i>
                                             </button>
@@ -75,6 +79,24 @@
                                         <?php 
                                             $cards = getCards($list['id']);
                                             if($cards){
+                                                if(isset($_POST['sortASC']) && $_POST['sortedListId'] == $list['id']){
+                                                    usort($cards, function($a, $b) {
+                                                        return $a['duration'] - $b['duration'];
+                                                    });
+                                                } else if(isset($_POST['sortDESC']) && $_POST['sortedListId'] == $list['id']){
+                                                    usort($cards, function($a, $b) {
+                                                        return $b['duration'] - $a['duration'];
+                                                    });
+                                                } else if(isset($_POST['sortGroupBy']) && $_POST['sortedListId'] == $list['id']){
+                                                    usort($cards, function($a, $b) {
+                                                        return $a['status'] - $b['status'];
+                                                    });
+                                                } else if(isset($_POST['sortStatus']) && $_POST['sortedListId'] == $list['id']){
+                                                    $cards = array_filter($cards, function($x){
+                                                        return $x['status'] == $_POST['statusFilter'];
+                                                    });
+                                                }
+
                                                 foreach($cards as $card){
                                                     ?>
                                                         <button class='single-card-button' onclick='openModal("edit_card", <?php echo $card["id"]; ?>, ["<?php echo $card["title"]; ?>","<?php echo $card["description"]; ?>",`<?php echo $statusesJSON; ?>`,"<?php echo $card["status"] ?>","<?php echo $card["duration"] ?>"])'>
@@ -110,8 +132,7 @@
             <div class="modal" modal>
                 
                 <div class='modalInner'>
-                    <span onclick="document.querySelector('[modal]').style.display='none'"
-                    class="w3-button">&times;</span>
+                    <span onclick="document.querySelector('[modal]').style.display='none'" class="w3-button">&times;</span>
                     <div class="modalContent" modalContent>
                         <p>Placeholder tekst</p>
                     </div>

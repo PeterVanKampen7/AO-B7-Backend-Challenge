@@ -34,6 +34,9 @@ function openModal(reason, id, extra = ''){
         case 'edit_card':
             content += renderCardContent(reason, id, extra);
             break;
+        case 'sort_list':
+            content += renderSortList(id, extra);
+            break;
     }
 
     modalContent.innerHTML = content;
@@ -157,6 +160,31 @@ function renderCardContent(reason, id, extra){
             <input type='submit' name='${reason}' value='Aanpassen' class='w3-button w3-blue'>
             <hr>
             <input type='submit' name='delete_card' value='Kaart verwijderen' class='w3-button w3-red'>
+        </form>
+    `;
+}
+
+function renderSortList(id, extra){
+    let statusArray = JSON.parse(JSON.stringify(extra));
+    let output = '';
+    for(let i in statusArray){
+        output += `
+            <option value='${statusArray[i]['id']}'>${statusArray[i]['name']}</option>
+        `;
+    }
+    return `
+        <h4> Filter lijst </h4>
+        <form method='post' class='sortListModal'>
+            <input type='hidden' value='${id}' name='sortedListId'>
+            <input type='submit' class='w3-button w3-blue w3-margin-bottom' name='sortASC' value='Tijd oplopend' />
+            <input type='submit' class='w3-button w3-blue w3-margin-bottom' name='sortDESC' value='Tijd aflopend' />
+            <input type='submit' class='w3-button w3-blue w3-margin-bottom' name='sortGroupBy' value='Groepeer statusen' />
+            <select name='statusFilter'>
+            ${output}
+            </select>
+            <input type='submit' class='w3-button w3-blue w3-margin-bottom' name='sortStatus' value='Alleen deze status' />
+            <hr>
+            <input type='submit' class='w3-button w3-red w3-margin-bottom' name='removeFilters' value='Verwijder filters' />
         </form>
     `;
 }

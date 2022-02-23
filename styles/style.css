@@ -205,6 +205,17 @@ div.empty-list{
     margin: 5px 0px;
 }
 
+.sortListModal{
+    display: flex;
+    flex-direction: column;
+}
+
+.sortListModal select{
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+
 footer {
     position: fixed;
     bottom: 0;
