@@ -122,6 +122,20 @@ function renderEditBoard(reason, id, extra){
 }
 
 function renderCardContent(reason, id, extra){
+    let statusArray = JSON.parse(extra[2]);
+    let output = '';
+    for(let i in statusArray){
+        if(extra[3] == statusArray[i]['id']){
+            output += `
+                <option selected value='${statusArray[i]['id']}'>${statusArray[i]['name']}</option>
+            `;
+        } else {
+            output += `
+                <option value='${statusArray[i]['id']}'>${statusArray[i]['name']}</option>
+            `;
+        }       
+    }
+
     return `
         <h4> Kaart aanpassen </h4>
         <form method='post' class='addCardForm'>      
@@ -130,7 +144,15 @@ function renderCardContent(reason, id, extra){
             <input type='text' name='newName' value='${extra[0]}' />
 
             <label for='newDesc'>Beschrijving</label>
-            <textarea type='text' name='newDesc' value='${extra[1]}'></textarea>
+            <textarea type='text' name='newDesc'>${extra[1]}</textarea>
+
+            <label for='newTime'>Tijdsduur</label>
+            <input type='number' name='newTime' value='${extra[4]}' />
+
+            <label for='newStatus'>Status</label>
+            <select name='newStatus'>
+            ${output}
+            </select>
 
             <input type='submit' name='${reason}' value='Aanpassen' class='w3-button w3-blue'>
             <hr>

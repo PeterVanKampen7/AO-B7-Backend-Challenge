@@ -294,7 +294,7 @@ function editList($list_id, $name){
 
     closeConn($conn);
 }
-function editCard($card_id, $name, $desc){
+function editCard($card_id, $name, $desc, $time, $status){
     $conn = openConn();
 
     $card_id = clean($card_id);
@@ -303,12 +303,16 @@ function editCard($card_id, $name, $desc){
 
     $result = $conn->prepare("UPDATE cards SET 
         `title` = :name,
-        `description` = :desc
+        `description` = :desc,
+        `duration` = :time,
+        `status` = :status
         WHERE id=:id"
     );
     $result->execute([
         'name' => $name,
         'desc' => $desc,
+        'time' => $time,
+        'status' => $status,
         'id' => $card_id       
     ]); 
 

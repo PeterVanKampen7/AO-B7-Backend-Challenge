@@ -198,6 +198,13 @@ a{
     width: 100%;
 }
 
+div.empty-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0px;
+}
+
 footer {
     position: fixed;
     bottom: 0;

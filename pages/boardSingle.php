@@ -24,7 +24,7 @@
         editList($_POST['list_id'], $_POST['newName']);
     }
     else if(isset($_POST['edit_card'])){
-        editCard($_POST['card_id'], $_POST['newName'], $_POST['newDesc']);
+        editCard($_POST['card_id'], $_POST['newName'], $_POST['newDesc'], $_POST['newTime'], $_POST['newStatus']);
     }
     else if(isset($_POST['delete_card'])){
         deleteCard($_POST['card_id']);
@@ -77,7 +77,7 @@
                                             if($cards){
                                                 foreach($cards as $card){
                                                     ?>
-                                                        <button class='single-card-button' onclick='openModal("edit_card", <?php echo $card["id"]; ?>, ["<?php echo $card["title"]; ?>","<?php echo $card["description"]; ?>"])'>
+                                                        <button class='single-card-button' onclick='openModal("edit_card", <?php echo $card["id"]; ?>, ["<?php echo $card["title"]; ?>","<?php echo $card["description"]; ?>",`<?php echo $statusesJSON; ?>`,"<?php echo $card["status"] ?>","<?php echo $card["duration"] ?>"])'>
                                                             <div class="w3-container singleCard">
                                                                 <h4 style="background-color: <?php echo $statusColors[$card['status']]; ?>"><?php echo $card['title'] ?></h4>
                                                                 <p><?php echo $card['description'] ?></p>
@@ -86,7 +86,9 @@
                                                     <?php
                                                 }
                                             } else {
-                                                echo '<br>';
+                                                ?>
+                                                    <div class='empty-list'>Geen items</div>
+                                                <?php
                                             }
                                             
                                         ?>
