@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 14, 2022 at 12:24 PM
+-- Generation Time: Mar 07, 2022 at 12:07 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.11
 
@@ -39,9 +39,8 @@ CREATE TABLE `boards` (
 --
 
 INSERT INTO `boards` (`id`, `user_id`, `name`) VALUES
-(1, 1, 'Test'),
-(23, 1, 'New name'),
-(25, 5, 'User board');
+(1, 1, 'Admin bord'),
+(25, 5, 'User bord');
 
 -- --------------------------------------------------------
 
@@ -63,8 +62,12 @@ CREATE TABLE `cards` (
 --
 
 INSERT INTO `cards` (`id`, `list_id`, `title`, `description`, `status`, `duration`) VALUES
-(1, 2, 'Card', 'Card desc', 0, 0),
-(14, 11, 'Card 1', 'Card 1 Beschrijving', 0, 0);
+(17, 12, 'New Card', 'Card description', 1, 50),
+(18, 12, 'New Card 2', 'In behandeling beschrijving', 2, 20),
+(20, 12, 'Card Done', 'Done', 3, 10),
+(22, 12, 'Lange Kaart', 'Dit is een hele lange beschrijving', 3, 180),
+(23, 12, '123', '456', 1, 20),
+(30, 14, 'List 2 Item', 'Beschrijving van een kaartje', 3, 30);
 
 -- --------------------------------------------------------
 
@@ -83,12 +86,29 @@ CREATE TABLE `lists` (
 --
 
 INSERT INTO `lists` (`id`, `board_id`, `name`) VALUES
-(2, 1, 'Eerste lijst'),
 (6, 1, '123'),
-(8, 1, '456'),
-(9, 1, '789'),
-(11, 23, 'Bord 1'),
-(12, 25, 'User list');
+(12, 25, 'User list'),
+(14, 25, 'User list 2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`) VALUES
+(1, 'Geen rol'),
+(2, 'Admin'),
+(3, 'Gebruiker');
 
 -- --------------------------------------------------------
 
@@ -98,16 +118,18 @@ INSERT INTO `lists` (`id`, `board_id`, `name`) VALUES
 
 CREATE TABLE `statuses` (
   `id` int(11) NOT NULL,
-  `naam` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `kleur` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `statuses`
 --
 
-INSERT INTO `statuses` (`id`, `naam`, `kleur`) VALUES
-(1, 'Open', '#2196F3');
+INSERT INTO `statuses` (`id`, `name`, `color`) VALUES
+(1, 'Open', '#2196F3'),
+(2, 'In Behandeling', '#00ff00'),
+(3, 'Afgerond', '#6600cc');
 
 -- --------------------------------------------------------
 
@@ -119,16 +141,16 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT '0'
+  `role_id` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `admin`) VALUES
-(1, 'admin', '123', 1),
-(5, 'peter', '123', 0);
+INSERT INTO `users` (`id`, `username`, `password`, `role_id`) VALUES
+(1, 'admin', '123', 2),
+(5, 'Peter', '123', 3);
 
 --
 -- Indexes for dumped tables
@@ -153,6 +175,12 @@ ALTER TABLE `lists`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `statuses`
 --
 ALTER TABLE `statuses`
@@ -172,31 +200,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `boards`
 --
 ALTER TABLE `boards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `cards`
 --
 ALTER TABLE `cards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `lists`
 --
 ALTER TABLE `lists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
