@@ -239,9 +239,27 @@ div.empty-list{
     align-items: center;
 }
 
+.editAccountContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+}
 .editAccount{
     margin: 20px;
     display: inline-flex;
+    flex-direction: column;
+    min-width: 30vw;
+}
+.editAccount input, .editAccount select{
+    padding: 5px;
+}
+
+.confirmDeleteForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
 }
 
