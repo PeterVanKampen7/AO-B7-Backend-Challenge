@@ -56,6 +56,17 @@
             ?>
         </div>
         <div class="logout">
+            <?php
+                if($pageDepth == 0){
+                    echo '
+                        <a href="pages/settings.php">Account</a>
+                    ';
+                } else if($pageDepth == 1){
+                    echo '
+                        <a href="../pages/settings.php">Account</a>
+                    ';
+                }
+            ?>
             <form action="" method="post">
                 <input type="submit" value="Log uit" name="logout" class="logout-btn w3-bar-item">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>

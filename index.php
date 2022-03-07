@@ -9,7 +9,9 @@
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            $_SESSION['admin'] = $user['admin'];
+            if($user['role_id'] == '2'){
+                $_SESSION['admin'] = true;
+            }         
         }
     } else if(isset($_POST['submit_reg'])){
         $newUserId = createUser($_POST['username'], $_POST['password']);
@@ -18,7 +20,7 @@
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            $_SESSION['admin'] = $user['admin'];
+            $_SESSION['admin'] = false;
         }
     }
 ?>

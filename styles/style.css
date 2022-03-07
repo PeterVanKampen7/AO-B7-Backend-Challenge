@@ -170,12 +170,14 @@ a{
     background-color: #444444aa;
     justify-content: center;
     align-items: center;
+    
 }
 .modalInner{
     background-color: white;
     padding: 20px;
     position: relative;
     max-width: 40vw;
+    min-width: 30vw;
 }
 .modalInner span{
     position: absolute;
@@ -232,6 +234,16 @@ div.empty-list{
     margin-bottom: 5px;
 }
 
+.logout{
+    display: flex;
+    align-items: center;
+}
+
+.editAccount{
+    margin: 20px;
+    display: inline-flex;
+    flex-direction: column;
+}
 
 footer {
     position: fixed;
