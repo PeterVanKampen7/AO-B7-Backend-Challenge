@@ -114,6 +114,25 @@ function editUser($user, $pass, $role, $id){
 
     closeConn($conn);
 }
+function deleteUser($id){
+    $conn = openConn();
+
+    $id = clean($id);
+
+    $query = "SELECT `id` FROM `boards` WHERE `user_id`=:id";
+    $result = $conn->prepare($query);
+    $result->execute(['id' => $id]);
+    $boards = $result->fetchAll();
+
+    foreach($boards as $board){
+        deleteBoard($board['id']);
+    }
+
+    $board = $conn->prepare("DELETE FROM users WHERE id=:safe");
+    $board->execute(['safe' => $id]);
+
+    closeConn($conn);
+}
 // End user information functions
 
 
