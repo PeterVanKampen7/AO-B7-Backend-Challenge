@@ -1,21 +1,21 @@
-try{
-    document.querySelector('[addBoardButton]').addEventListener('click', function(){
-        document.querySelector('[addBoardForm]').style.display = 'block';  
+try {
+    document.querySelector('[addBoardButton]').addEventListener('click', function() {
+        document.querySelector('[addBoardForm]').style.display = 'block';
     });
-} catch(e){}
+} catch (e) {}
 
-try{
-    document.querySelector('[addListButton]').addEventListener('click', function(){
-        document.querySelector('[addListForm]').style.display = 'block';  
+try {
+    document.querySelector('[addListButton]').addEventListener('click', function() {
+        document.querySelector('[addListForm]').style.display = 'block';
     });
-} catch(e){}
+} catch (e) {}
 
-function openModal(reason, id, extra = ''){
+function openModal(reason, id, extra = '') {
     const modal = document.querySelector('[modal]');
     const modalContent = document.querySelector('[modalContent]');
 
     let content = '';
-    switch(reason){
+    switch (reason) {
         case 'add_card':
             content += renderAddCardForm(reason, id, extra);
             break;
@@ -40,13 +40,13 @@ function openModal(reason, id, extra = ''){
     }
 
     modalContent.innerHTML = content;
-    modal.style.display = 'flex'; 
+    modal.style.display = 'flex';
 }
 
-function renderAddCardForm(reason, id, extra){
+function renderAddCardForm(reason, id, extra) {
     let statusArray = JSON.parse(JSON.stringify(extra));
     let output = '';
-    for(let i in statusArray){
+    for (let i in statusArray) {
         output += `
             <option value='${statusArray[i]['id']}'>${statusArray[i]['name']}</option>
         `;
@@ -76,7 +76,7 @@ function renderAddCardForm(reason, id, extra){
     `;
 }
 
-function renderDeleteList(reason, id){
+function renderDeleteList(reason, id) {
     return `
         <h4> Lijst verwijderen </h4>
         <form method='post' class='addCardForm'>      
@@ -87,7 +87,7 @@ function renderDeleteList(reason, id){
     `;
 }
 
-function renderDeleteBoard(reason, id){
+function renderDeleteBoard(reason, id) {
     return `
         <h4> Bord verwijderen </h4>
         <form method='post' class='addCardForm'>      
@@ -98,7 +98,7 @@ function renderDeleteBoard(reason, id){
     `;
 }
 
-function renderEditList(reason, id, extra){
+function renderEditList(reason, id, extra) {
     return `
         <h4> Naam aanpassen </h4>
         <form method='post' class='addCardForm'>      
@@ -111,7 +111,7 @@ function renderEditList(reason, id, extra){
     `;
 }
 
-function renderEditBoard(reason, id, extra){
+function renderEditBoard(reason, id, extra) {
     return `
         <h4> Naam aanpassen </h4>
         <form method='post' class='addCardForm'>      
@@ -124,11 +124,11 @@ function renderEditBoard(reason, id, extra){
     `;
 }
 
-function renderCardContent(reason, id, extra){
+function renderCardContent(reason, id, extra) {
     let statusArray = JSON.parse(extra[2]);
     let output = '';
-    for(let i in statusArray){
-        if(extra[3] == statusArray[i]['id']){
+    for (let i in statusArray) {
+        if (extra[3] == statusArray[i]['id']) {
             output += `
                 <option selected value='${statusArray[i]['id']}'>${statusArray[i]['name']}</option>
             `;
@@ -136,7 +136,7 @@ function renderCardContent(reason, id, extra){
             output += `
                 <option value='${statusArray[i]['id']}'>${statusArray[i]['name']}</option>
             `;
-        }       
+        }
     }
 
     return `
@@ -164,10 +164,10 @@ function renderCardContent(reason, id, extra){
     `;
 }
 
-function renderSortList(id, extra){
+function renderSortList(id, extra) {
     let statusArray = JSON.parse(JSON.stringify(extra));
     let output = '';
-    for(let i in statusArray){
+    for (let i in statusArray) {
         output += `
             <option value='${statusArray[i]['id']}'>${statusArray[i]['name']}</option>
         `;
