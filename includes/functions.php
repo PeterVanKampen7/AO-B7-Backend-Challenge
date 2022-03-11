@@ -3,19 +3,23 @@
 // Globally useful functions
 function openConn(){
     try {
+        // Open connection to the DB
         $conn = new PDO('mysql:host=localhost;dbname=b7_back-end', "root", "mysql");
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
         die();
     }
+    // Return the new connection
     return $conn;
 }
 
 function closeConn($conn){
+    // Close the connection given as parameter
     $conn = null;
 }
 
 function clean($data){
+    // Clean the given parameter of unwanted characters
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);

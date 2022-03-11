@@ -1,10 +1,14 @@
 <?php
+    // Indicate page depth
     $pageDepth = 1;
 
+    // Header
     require('../includes/header.php');
 
+    // If user indicated he does not want to delete redirect back to settings page
     if(isset($_POST['notDelete'])){
         header("Location: settings.php");
+    // If user confirms he want to delete account, destroy the session and delete accout with function
     } else if(isset($_POST['deleteUser'])){
         deleteUser($_SESSION['user_id']);
         session_unset();

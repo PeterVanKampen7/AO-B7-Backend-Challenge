@@ -1,7 +1,11 @@
 <?php
+    // Always start a SESSION on all pages
     session_start();
+    // Include all functions, header is included on all pages, so functions will be on all pages as well
     include('functions.php');
+    // Make empty array to build nav menu
     $navLinks = array();
+    // Depending on page depth fill the array with key value containing links to pages
     switch($pageDepth){
         case 0:
             $navLinks['Home'] = 'index.php';
@@ -13,6 +17,7 @@
             break;
     }
 
+    // If user logs out unset and destroy the SESSION
     if(isset($_POST['logout'])){
         session_unset();
         session_destroy();
@@ -29,6 +34,7 @@
     <script src="https://kit.fontawesome.com/7cbd5a96fb.js" crossorigin="anonymous"></script>
     
     <?php
+        // Link JS and CSS
         if($pageDepth == 0){
             echo '
             <link rel="stylesheet" href="styles/style.css">
@@ -50,6 +56,7 @@
         </div>
         <div class="w3-bar header-right">
             <?php
+            // Loop through the menu array, and put these items in the menu
                 foreach($navLinks as $key => $value){
                     echo "<a href='{$value}' class='w3-bar-item'>{$key}</a>";
                 }
@@ -57,6 +64,7 @@
         </div>
         <div class="logout">
             <?php
+            // Add account page link to menu
                 if($pageDepth == 0){
                     echo '
                         <a href="pages/settings.php">Account</a>

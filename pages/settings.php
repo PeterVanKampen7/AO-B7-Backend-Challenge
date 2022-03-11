@@ -1,8 +1,11 @@
 <?php
+    // Indicate page depth
     $pageDepth = 1;
 
+    // Header
     require('../includes/header.php');
 
+    // If user submitted the form update his data
     if(isset($_POST['accountUpdated'])){
         $new_username = $_POST['username'];
         $new_password = $_POST['password'];
@@ -10,9 +13,11 @@
 
         editUser($new_username, $new_password, $new_role, $_SESSION['user_id']);
     } else if(isset($_POST['deleteUser'])){
+        // If user wants to delete acount redirect to page
         header("Location: confirmDelete.php");
     }
 
+    // Reset the user data is case data was updated
     $user = getUser($_SESSION['user_id']);
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
@@ -50,6 +55,7 @@
             
         <?php
     } else {
+        // If user is not logged in redirect to index
         header("Location: ../index.php");
         exit();
     }

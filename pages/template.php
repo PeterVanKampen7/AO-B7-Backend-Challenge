@@ -1,4 +1,6 @@
 <?php
+    // Empty page template
+
     $pageDepth = 1;
 
     require('../includes/header.php');
