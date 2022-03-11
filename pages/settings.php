@@ -14,7 +14,6 @@
     }
 
     $user = getUser($_SESSION['user_id']);
-    $_SESSION['logged_in'] = true;
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
     if($user['role_id'] == '2'){
