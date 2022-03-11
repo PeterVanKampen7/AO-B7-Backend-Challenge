@@ -43,6 +43,11 @@
                                     <div class="w3-card w3-blue w3-padding boardCard">
                                         <a href="boardSingle.php?id=<?php echo $board['id'];?>">
                                             <h3><?php echo $board['name']; ?></h3>
+                                            <?php
+                                                if($_SESSION['admin']){
+                                                    echo "<h6>Gebruiker: ".$board['username']."</h6>";
+                                                }
+                                            ?>
                                         </a>
 
                                         <button onclick='openModal("edit_board", <?php echo $board["id"]; ?>, "<?php echo $board["name"]; ?>")'>

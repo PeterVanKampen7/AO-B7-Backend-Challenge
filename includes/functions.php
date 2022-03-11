@@ -145,21 +145,15 @@ function deleteUser($id){
 function getBoards($id, $admin = false){
     $conn = openConn();
 
-    if($admin){
-
-        $query = "SELECT * FROM `boards`";
-        $result = $conn->prepare($query);
-        $result->execute(['id' => $id]);
-        $boards = $result->fetchAll();
-
-    } else {
-
-        $query = "SELECT * FROM `boards` WHERE `user_id`=:id";
-        $result = $conn->prepare($query);
-        $result->execute(['id' => $id]);
-        $boards = $result->fetchAll();
-
+    $query = "SELECT boards.id, boards.user_id, boards.name, users.username FROM `boards` LEFT JOIN users on boards.user_id = users.id";    
+        
+    if(!$admin){
+        $query .= " WHERE `user_id`=:id";
     }
+
+    $result = $conn->prepare($query);
+    $result->execute(['id' => $id]);
+    $boards = $result->fetchAll();
 
     closeConn($conn);
 
