@@ -11,6 +11,7 @@
     // If user creates new list, create the list with function
     if(isset($_POST['createList'])){
         createList($board_id, $_POST['listName']);
+        header("location:".$_SERVER['REQUEST_URI']);
     }
     // If user want to add card, create card with function
     else if(isset($_POST['add_card'])){
@@ -20,23 +21,28 @@
         $duration = $_POST['cardDuration'];
         $status = $_POST['cardStatus'];
 
-        createCard($list_id, $title, $desc, $duration, $status);       
+        createCard($list_id, $title, $desc, $duration, $status);   
+        header("location:".$_SERVER['REQUEST_URI']);    
     }
     // If user want to remove the list, remove the list with function
     else if(isset($_POST['remove_list'])){
         deleteList($_POST['list_id']);
+        header("location:".$_SERVER['REQUEST_URI']);
     }
     // If user wants to edit list, edit list with function
     else if(isset($_POST['edit_list'])){
         editList($_POST['list_id'], $_POST['newName']);
+        header("location:".$_SERVER['REQUEST_URI']);
     }
     // If user wants to edit card, edit card with function
     else if(isset($_POST['edit_card'])){
         editCard($_POST['card_id'], $_POST['newName'], $_POST['newDesc'], $_POST['newTime'], $_POST['newStatus']);
+        header("location:".$_SERVER['REQUEST_URI']);
     }
     // If user wants to delete card, delete card with function
     else if(isset($_POST['delete_card'])){
         deleteCard($_POST['card_id']);
+        header("location:".$_SERVER['REQUEST_URI']);
     }
 
     // Get all lists for current board

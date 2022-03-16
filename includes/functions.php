@@ -400,6 +400,7 @@ function rolesToOptions($roles, $current_role = null){
     $return = '<option disabled selected> Kies jouw rol </option>';
 
     foreach($roles as $role){
+        if($role['id'] == 2) continue;
         if($role['id'] == $current_role){
             $return .= "<option selected value={$role['id']}> {$role['name']} </option>";
         } else {
